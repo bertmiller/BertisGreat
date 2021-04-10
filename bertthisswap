@@ -11,6 +11,22 @@ interface IWETH is IERC20 {
     function withdraw(uint) external;
 }
 
+interface Uniswap {
+    function getAmountsOut(uint amountIn, address[] memory path)
+        public
+        view
+        virtual
+        override
+        returns (uint[] memory amounts)
+
+    function swapExactETHForTokens(uint amountOutMin, address[] calldata path, address to, uint deadline)
+        external
+        virtual
+        override
+        payable
+        ensure(deadline)
+        returns (uint[] memory amounts)
+}
 contract FlashBotsMultiCallFL is FlashLoanReceiverBase {
     using SafeMath for uint256;
     address private immutable owner;
